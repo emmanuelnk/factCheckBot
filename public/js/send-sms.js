@@ -1,4 +1,6 @@
-const form = document.getElementById('smsForm');
+'use strict'
+
+const form = document.getElementById('smsForm')
 
 /**
  * Displays a message to the user in a colored box. Changes the color based
@@ -7,18 +9,18 @@ const form = document.getElementById('smsForm');
  * @param {'success' | 'error'} type whether the message should be shown as error or success
  */
 function showMessage(message, type) {
-  const dialogContent = document.getElementById('dialogContent');
-  const dialogTitle = document.getElementById('dialogTitle');
-  const dialog = document.getElementById('dialog');
+  const dialogContent = document.getElementById('dialogContent')
+  const dialogTitle = document.getElementById('dialogTitle')
+  const dialog = document.getElementById('dialog')
 
   if (!dialogContent || !dialogTitle || !dialog) {
-    return;
+    return
   }
 
-  dialogContent.innerText = message;
-  dialogTitle.innerText = type === 'success' ? 'SMS Sent!' : 'Error';
-  dialog.classList.remove('alert-success', 'alert-danger', 'd-none');
-  dialog.classList.add(type === 'success' ? 'alert-success' : 'alert-danger');
+  dialogContent.innerText = message
+  dialogTitle.innerText = type === 'success' ? 'SMS Sent!' : 'Error'
+  dialog.classList.remove('alert-success', 'alert-danger', 'd-none')
+  dialog.classList.add(type === 'success' ? 'alert-success' : 'alert-danger')
 }
 
 /**
@@ -26,15 +28,15 @@ function showMessage(message, type) {
  * @param {HTMLFormElement} form a form element that should have the fields cleared
  */
 function clearForm(form) {
-  form.to.value = null;
-  form.body.value = null;
+  form.to.value = null
+  form.body.value = null
 }
 
 if (form) {
   form.addEventListener('submit', function(evt) {
-    evt.preventDefault();
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    evt.preventDefault()
+    const headers = new Headers()
+    headers.append('Content-Type', 'application/json')
     fetch('/send-sms', {
       method: 'POST',
       headers,
@@ -44,17 +46,17 @@ if (form) {
       }),
     })
       .then(resp => {
-        return resp.json();
+        return resp.json()
       })
       .then(respJson => {
-        showMessage(respJson.message, respJson.status);
+        showMessage(respJson.message, respJson.status)
 
         if (respJson.status === 'success') {
-          clearForm(form);
+          clearForm(form)
         }
       })
       .catch(err => {
-        showMessage(err.message, 'error');
-      });
-  });
+        showMessage(err.message, 'error')
+      })
+  })
 }

@@ -1,8 +1,10 @@
-const cfg = require('./config');
-const server = require('./server');
+'use strict'
+
+const cfg = require('./config')
+const server = require('./server')
 
 server.listen(cfg.port, function() {
   console.log(
     `Starting sample-appointment-reminders at http://localhost:${cfg.port}`
-  );
-});
+  )
+})

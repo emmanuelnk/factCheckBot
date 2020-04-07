@@ -1,6 +1,12 @@
 {
   "extends": ["google", "plugin:prettier/recommended"],
   "parserOptions": {
-    "ecmaVersion": 8
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "no-console": 0,
+    "require-jsdoc": 0,
+    "no-invalid-this": 0,
+    "strict": [ "error", "global" ]
   }
 }
